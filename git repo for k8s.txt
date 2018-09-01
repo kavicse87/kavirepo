@@ -3,3 +3,8 @@ git repo for k8s
 karthikeyansiva/brainstack-k8s
 kavicse87/kavirepo
 dennyzhang/cheatsheet-kubernetes-A4
+dennyzhang/challenges-kubernetes
+
+
+dennyzhang/devops_public
+dennyzhang/Denny-s-emacs-configuration
