@@ -1,0 +1,137 @@
+docker-compose is an add on in the docker engine
+docker-compose.yml
+version"3"
+services:
+  web:
+   image: nginx
+   ports: -80:80
+  cache:
+   image: redis
+
+port isn't needed for redis when we're using it for cache purpose
+
+docker-compose config
+docker-compose up -d
+docker-compose up
+docker-compose top cache
+
+docker-compose up --scale cache=2 -d */ we can scale the containers which isn't attached with the ports
+
+docker-compose down */ which will delete the images as well
+
+docker images
+
+docker rmi imageid */image id is there in "docker images"
+
+
+docker network list
+
+bridge network -- it will autoconnect with all the machines
+
+docker-compose -p dev ps */naming convention it will show in dev_cache 
+
+docker-compose.yml
+version"3"
+services:
+  web:
+   image: nginx
+   container_name: lb
+   ports: 
+    - "80:80"
+  cache:
+   container_name: caching
+   image: redis
+   
+
+docker-compose -p uat up -d
+creating n/w "uat_default" with default driver
+
+docker-compose -p uat ps
+
+out put will be in the name of container name
+
+note: supervisord can be used to run multiple services in a container
+
+dcoker - immutable infrastructure, shouldn't be changed (test, baked & build and it will run)
+
+prod - a service should be running in a container
+
+
+Volumes:
+
+docker-compose.yml
+version"3"
+services:
+  web:
+   image: nginx
+   container_name: lb
+   ports: 
+    - "80:80"
+   volumes:
+     -data:/etc/niginx
+     -webdata:/usr/share/nginx/html
+  cache:
+   container_name: caching
+   image: redis
+volumes:
+  data:
+  webdata:
+
+dcoker-compose -p uat down
+docker volume list
+dcoker-compose config
+docker compose up -d
+docker volume list
+docker volume inspect projects_data
+cd /var/lib/docker/volumes/projects_data/_data/conf.d
+
+volumes will be crated in the location
+/var/lib/docker/volumes/
+/var/lib/docker/volumes/projects_data/_data/
+
+index.html */ html changes doesn't need service reload otheriwse we need to do service restart
+
+docker-compose restart
+dcoker-compose lb restart --- it's not service name
+docker-compose web restart --- web is the service name
+
+build
+
+FROM nginx
+RUN echo "Welcome to Doecker" >> /usr/share/nginx/index.html
+
+docker-compose.yml
+version"3"
+services:
+  web:
+   build: . or httpd/. */location of the docker file
+   container_name: lb
+   ports: 
+    - "80:80"
+   volumes:
+     -data:/etc/niginx
+     -webdata:/usr/share/nginx/html/index.html
+  cache:
+   container_name: caching
+   image: redis
+volumes:
+  data:
+  webdata:
+
+docker volume prune */ will delete all the unused volumes
+dcoker volume rm */volume name
+docker-compose up -d --build
+
+docker images rmi imageid
+
+
+
+
+
+
+
+
+
+
+
+

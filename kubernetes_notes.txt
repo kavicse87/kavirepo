@@ -1,0 +1,12 @@
+kubernetes:
+  container orchestraion tool 
+
+kubectl to apiserver -- interaction 
+apiserver to scheduler
+will check the manage nodes and schedule and kubelet will do the container creation and give it to controller and controller will register in etcd.. kubelet will monitor the pod if incase of issues it will inform the controller and it will check etcd and notify the scheduler than scheduler will check the availability among the nodes and give kubelet the responsibility.
+  etcd -single state of truth -- etcd daily backup is needed.
+  controller
+  scheduler
+  kubelt - will connect all the nodes using overlay nw
+    ++
+  docker engine
